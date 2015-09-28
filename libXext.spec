@@ -4,7 +4,7 @@
 #
 Name     : libXext
 Version  : 1.3.3
-Release  : 3
+Release  : 4
 URL      : http://xorg.freedesktop.org/releases/individual/lib/libXext-1.3.3.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/lib/libXext-1.3.3.tar.gz
 Summary  : Misc X Extension Library
