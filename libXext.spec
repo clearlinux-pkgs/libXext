@@ -4,7 +4,7 @@
 #
 Name     : libXext
 Version  : 1.3.3
-Release  : 6
+Release  : 7
 URL      : http://xorg.freedesktop.org/releases/individual/lib/libXext-1.3.3.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/lib/libXext-1.3.3.tar.gz
 Summary  : Misc X Extension Library
@@ -29,6 +29,7 @@ without breaking compatibility of this core library.
 Summary: dev components for the libXext package.
 Group: Development
 Requires: libXext-lib
+Provides: libXext-devel
 
 %description dev
 dev components for the libXext package.
@@ -54,10 +55,15 @@ lib components for the libXext package.
 %setup -q -n libXext-1.3.3
 
 %build
+export LANG=C
 %configure --disable-static
-make V=1 %{?_smp_mflags}
+make V=1  %{?_smp_mflags}
 
 %check
+export LANG=C
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
@@ -85,8 +91,8 @@ rm -rf %{buildroot}
 /usr/include/X11/extensions/shape.h
 /usr/include/X11/extensions/sync.h
 /usr/include/X11/extensions/xtestext1.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libXext.so
+/usr/lib64/pkgconfig/xext.pc
 
 %files doc
 %defattr(-,root,root,-)
@@ -95,4 +101,5 @@ rm -rf %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libXext.so.6
+/usr/lib64/libXext.so.6.4.0
