@@ -6,7 +6,7 @@
 #
 Name     : libXext
 Version  : 1.3.3
-Release  : 9
+Release  : 10
 URL      : http://xorg.freedesktop.org/releases/individual/lib/libXext-1.3.3.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/lib/libXext-1.3.3.tar.gz
 Source99 : http://xorg.freedesktop.org/releases/individual/lib/libXext-1.3.3.tar.gz.sig
@@ -89,7 +89,14 @@ popd
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1484412157
+export SOURCE_DATE_EPOCH=1492279154
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto "
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -109,7 +116,7 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1484412157
+export SOURCE_DATE_EPOCH=1492279154
 rm -rf %{buildroot}
 pushd ../build32/
 %make_install32
